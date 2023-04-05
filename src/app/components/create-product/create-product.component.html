@@ -1,0 +1,6 @@
+<form (ngSubmit)="submit()">
+    <input [(ngModel)]="newProduct.title" #title="ngModel" name="title" type="text" class="border w-full py-2 px-4 mb-2"
+        placeholder="Product name" required appFocus>
+    <p [hidden]="title.untouched||title.valid" class="text-red-600 font-medium mb-2">Title is required</p>
+    <button class="py-2 px-4 bg-blue-600 text-white" type="submit">Create record</button>
+</form>

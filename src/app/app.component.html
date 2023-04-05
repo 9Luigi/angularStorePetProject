@@ -1,10 +1,17 @@
-<app-global-error></app-global-error>
-<div class="max-w-2xl container mx-auto pt-5">
-    <h1 *ngIf="!loading" class="font-bold mb-2 text-center text-mb">{{title|titlecase}}</h1>
-    <input *ngIf="!loading" type="text" class="mb-2 border py-2 px-4 w-full" placeholder="Search"
-        [(ngModel)]="condition">
-    <img *ngIf="loading" class="mx-auto" src="../assets/images/loadAnimation.gif" alt="Loading...">
-    <div *ngIf="products$ | async as products">
-        <app-product *ngFor="let product of products|filterProducts:condition" [product]="product"></app-product>
+<div>
+    <app-global-error></app-global-error>
+    <div class="max-w-2xl container mx-auto pt-5">
+        <h1 *ngIf="!loading" class="font-bold mb-2 text-center text-mb">{{title|titlecase}}</h1>
+        <input *ngIf="!loading" type="text" class="mb-2 border py-2 px-4 w-full" placeholder="Search"
+            [(ngModel)]="condition">
+        <img *ngIf="loading" class="mx-auto" src="../assets/images/loadAnimation.gif" alt="Loading...">
+        <div *ngIf="httpService.products">
+            <app-product *ngFor="let product of httpService.products|filterProducts:condition" [product]="product"></app-product>
+        </div>
     </div>
+    <app-modal *ngIf="modalService.isVisible$ |async" [title]="'Create new product'">
+        <app-create-product></app-create-product>
+    </app-modal>
+    <button class="rounded-full bg-red-700 text-white fixed right-5 bottom-5 py-2 px-4"
+        (click)="modalService.open()">+</button>
 </div>

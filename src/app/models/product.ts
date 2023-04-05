@@ -1,12 +1,11 @@
-export interface IProduct {
-    id: number,
-    title: string,
-    price: number,
-    description: string,
-    category: string,
-    image: string,
-    rating: {
-        rate: number,
-        count: number
-    }
+import { IProduct } from "./product.abstract"
+
+export class Product implements IProduct {
+    id: number;
+    title: string;
+    price: number;
+    description: string;
+    category: string;
+    image: string;
+    rating: { rate: number; count: number; };
 }
