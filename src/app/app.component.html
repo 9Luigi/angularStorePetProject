@@ -1,5 +1,10 @@
+<app-global-error></app-global-error>
 <div class="max-w-2xl container mx-auto pt-5">
-    <p *ngIf="loading" class="text-center text-lg">Loading...</p>
     <h1 *ngIf="!loading" class="font-bold mb-2 text-center text-mb">{{title|titlecase}}</h1>
-    <app-product *ngFor="let product of products$ | async" [product]="product"></app-product>
+    <input *ngIf="!loading" type="text" class="mb-2 border py-2 px-4 w-full" placeholder="Search"
+        [(ngModel)]="condition">
+    <img *ngIf="loading" class="mx-auto" src="../assets/images/loadAnimation.gif" alt="Loading...">
+    <div *ngIf="products$ | async as products">
+        <app-product *ngFor="let product of products|filterProducts:condition" [product]="product"></app-product>
+    </div>
 </div>
